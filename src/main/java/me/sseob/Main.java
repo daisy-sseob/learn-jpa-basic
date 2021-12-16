@@ -14,14 +14,19 @@ public class Main {
 		EntityTransaction transaction = entityManager.getTransaction();
 		transaction.begin();
 		
-		Member member = new Member();
-		member.setId(1L);
-		member.setName("sseob");
-		entityManager.persist(member);
-		
-		transaction.commit();
-		
-		entityManager.close();
+		try {
+
+			Member member = new Member();
+			member.setId(1L);
+			member.setName("sseob");
+			entityManager.persist(member);
+			
+			transaction.commit();
+		} catch (Exception e){
+			transaction.rollback();
+		} finally {
+			entityManager.close();
+		}
 		entityManagerFactory.close();
 	}
 }
