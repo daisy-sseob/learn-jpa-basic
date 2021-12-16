@@ -16,10 +16,18 @@ public class Main {
 		
 		try {
 
+			/*
+			간단하게 insert
 			Member member = new Member();
 			member.setId(1L);
 			member.setName("sseob");
 			entityManager.persist(member);
+			 */
+			
+			// 수정해보자
+			Member findMember = entityManager.find(Member.class, 1L);
+			findMember.setName("sseob modify"); 
+			entityManager.persist(findMember);
 			
 			transaction.commit();
 		} catch (Exception e){
