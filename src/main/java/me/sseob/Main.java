@@ -1,9 +1,7 @@
 package me.sseob;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
+import java.util.List;
 
 public class Main {
 
@@ -16,18 +14,24 @@ public class Main {
 		
 		try {
 
-			/*
-			간단하게 insert
-			Member member = new Member();
-			member.setId(1L);
-			member.setName("sseob");
-			entityManager.persist(member);
-			 */
+//			간단하게 insert
+//			Member member = new Member();
+//			member.setId(2L);
+//			member.setName("sseob22");
+//			entityManager.persist(member);
 			
-			// 수정해보자
 			Member findMember = entityManager.find(Member.class, 1L);
-			findMember.setName("sseob modify"); 
-			entityManager.persist(findMember);
+			// 수정해보자 jpa가 관리를 해주기 때문에 저장메소드를 실행시키기 않아도 jpa가 update쿼리를 생성하여 실행 후 commit 한다.
+			findMember.setName("sseob");
+
+			List<Member> findMembers = entityManager.createQuery("select m from Member as m", Member.class)
+					.setFirstResult(0)
+					.setMaxResults(10)
+					.getResultList();
+
+			for (Member member : findMembers) {
+				System.out.println("name = " + member.getName());
+			}
 			
 			transaction.commit();
 		} catch (Exception e){
