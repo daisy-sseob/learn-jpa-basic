@@ -1,14 +1,16 @@
 package me.sseob;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
-@Entity
+@Entity(name = "Member") // jpa에서 관리하는 객체.
+//@Table(name = "MBR") // MBR 이라는 테이블에 매핑하게 된다.
 public class Member {
 	@Id
 	private Long id;
 	private String name;
+	private int age;
 
 	public Long getId() {
 		return id;
