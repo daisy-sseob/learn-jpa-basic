@@ -26,6 +26,9 @@ public class Member {
 	@Lob
 	private String description;
 
+	@Transient // db컬럼에 추가하고 싶지 않은 field
+	private int temp;
+
 	public Member() {
 	}
 
