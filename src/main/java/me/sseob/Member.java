@@ -1,26 +1,31 @@
 package me.sseob;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity(name = "Member") // jpa에서 관리하는 객체.
+@SequenceGenerator(
+		name = "MEMBER_SEQ_GENERATOR",
+		sequenceName = "MEMBER_SEQNO",
+		initialValue = 1, allocationSize = 60
+)
 public class Member {
+
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE) // Auto. Db에 따라 자동적용된다. (oracle이면 sequence생성)
 	private Long id;
-	
+
 	@Column(name = "name", nullable = false) // db column 명을 name으로 설정, nullable -> database not null제약조건이 추가된다.
 	private String username;
-	
+
 	private Integer age;
 
 	@Enumerated(EnumType.STRING) // default는 ORINAL인데 Enum의 order를 저장하는 컬럼으로 생성된다.
 	private RoleType roleType;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createdDate;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date lastModifiedDate;
 

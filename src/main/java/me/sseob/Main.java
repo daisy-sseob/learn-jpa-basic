@@ -16,7 +16,6 @@ public class Main {
 
 //			간단하게 insert
 			Member member = new Member();
-			member.setId(1L);
 			member.setUsername("sseob");
 			member.setRoleType(RoleType.USER);
 			entityManager.persist(member);
