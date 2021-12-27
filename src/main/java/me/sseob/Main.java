@@ -22,7 +22,7 @@ public class Main {
 			
 			Member findMember = entityManager.find(Member.class, 1L);
 			// 수정해보자 jpa가 관리를 해주기 때문에 저장메소드를 실행시키기 않아도 jpa가 update쿼리를 생성하여 실행 후 commit 한다.
-			findMember.setName("sseob");
+			findMember.setUsername("sseob");
 
 			List<Member> findMembers = entityManager.createQuery("select m from Member as m", Member.class)
 					.setFirstResult(0)
@@ -30,7 +30,7 @@ public class Main {
 					.getResultList();
 
 			for (Member member : findMembers) {
-				System.out.println("name = " + member.getName());
+				System.out.println("name = " + member.getUsername());
 			}
 			
 			transaction.commit();
