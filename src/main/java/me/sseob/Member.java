@@ -1,20 +1,21 @@
 package me.sseob;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity(name = "Member") // jpa에서 관리하는 객체.
-//@Table(name = "MBR") // MBR 이라는 테이블에 매핑하게 된다.
 public class Member {
 	@Id
 	private Long id;
 	
-	@Column(name = "name") // db column 명을 name으로 설정
+	@Column(name = "name", nullable = false) // db column 명을 name으로 설정, nullable -> database not null제약조건이 추가된다.
 	private String username;
 	
 	private Integer age;
 
-	@Enumerated(EnumType.STRING)
+	@Enumerated(EnumType.STRING) // default는 ORINAL인데 Enum의 order를 저장하는 컬럼으로 생성된다.
 	private RoleType roleType;
 	
 	@Temporal(TemporalType.TIMESTAMP)
@@ -22,8 +23,8 @@ public class Member {
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date lastModifiedDate;
-	
-	@Lob
+
+	@Lob // java type에 따라 blob, clob컬럼으로 설정된다.
 	private String description;
 
 	@Transient // db컬럼에 추가하고 싶지 않은 field
