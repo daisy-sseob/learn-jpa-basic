@@ -3,7 +3,7 @@ package me.sseob;
 import javax.persistence.*;
 import java.util.Date;
 
-@Entity(name = "Member") // jpa에서 관리하는 객체.
+@Entity(name = "Members") // jpa에서 관리하는 객체.
 @SequenceGenerator(
 		name = "MEMBER_SEQ_GENERATOR",
 		sequenceName = "MEMBER_SEQNO",
