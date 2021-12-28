@@ -3,7 +3,7 @@ package me.sseob.book.shop.domain;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity
+@Entity(name = "Orders")
 public class Order {
 
 	@Id @GeneratedValue
