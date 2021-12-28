@@ -38,6 +38,10 @@ public class Member {
 	public Member() {
 	}
 
+	public Member(String username) {
+		this.username = username;
+	}
+
 	public Long getId() {
 		return id;
 	}

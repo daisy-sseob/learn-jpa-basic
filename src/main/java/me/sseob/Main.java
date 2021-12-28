@@ -19,7 +19,14 @@ public class Main {
 			member.setUsername("sseob");
 			member.setRoleType(RoleType.USER);
 			entityManager.persist(member);
-			
+
+			Member member1 = new Member("현섭");
+			Member member2 = new Member("현섭2");
+			Member member3 = new Member("현섭3");
+			entityManager.persist(member1);
+			entityManager.persist(member2);
+			entityManager.persist(member3);
+
 			Member findMember = entityManager.find(Member.class, 1L);
 			// 수정해보자 jpa가 관리를 해주기 때문에 저장메소드를 실행시키기 않아도 jpa가 update쿼리를 생성하여 실행 후 commit 한다.
 			findMember.setUsername("sseob");
