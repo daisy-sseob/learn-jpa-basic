@@ -1,26 +1,36 @@
 package me.sseob.book.shop.domain;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Team {
 
-	@Id @GeneratedValue
+	@Id
+	@GeneratedValue
 	@Column(name = "team_id")
 	private Long id;
-	
 	private String name;
+	
+	@OneToMany(mappedBy = "team")
+	private Set<Member> members = new HashSet<>();
 
 	public Team(String name) {
 		this.name = name;
 	}
 
 	public Team() {
-		
+
+	}
+
+	public Set<Member> getMembers() {
+		return members;
+	}
+
+	public void setMembers(Set<Member> members) {
+		this.members = members;
 	}
 
 	public Long getId() {

@@ -21,20 +21,18 @@ public class ShopMain {
 		
 		try {
 
-			Team real_madrid = new Team("real madrid");
-			entityManager.persist(real_madrid);
+//			Team tottenham = new Team("tottenham");
+//			entityManager.persist(tottenham);
+//			Member member = new Member("sseob22");
+//			member.setTeam(team);
+//			entityManager.persist(member);
 			
-			Team tottenham = new Team("tottenham");
-			entityManager.persist(tottenham);
-			
-			Member member = new Member("sseob");
-			member.setTeam(real_madrid);
-			entityManager.persist(member);
-
-			Member findMember = entityManager.find(Member.class, member.getId());
-			System.out.println("================= findMember.getName() = " + findMember.getName());
-			System.out.println("================= findMember.team.name = " + findMember.getTeam().getName());
-			findMember.setTeam(tottenham);
+//			Member findMember = entityManager.find(Member.class, 2L);
+//			System.out.println("===================" + findMember.getName());
+//
+//			for (Member member : findMember.getTeam().getMembers()) {
+//				System.out.println(member.getName());
+//			}
 			
 			transaction.commit();
 		} catch (Exception e){
