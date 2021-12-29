@@ -8,11 +8,32 @@ public class Member {
 	@Id @GeneratedValue
 	@Column(name = "member_id")
 	private Long id;
+
+	@ManyToOne
+	@JoinColumn(name = "team_id")
+	private Team team;
+	
 	private String name;
 	private String city;
 	private String street;
 	private String zipcode;
-	
+
+	public Member(String name) {
+		this.name = name;
+	}
+
+	public Member() {
+		
+	}
+
+	public Team getTeam() {
+		return team;
+	}
+
+	public void setTeam(Team team) {
+		this.team = team;
+	}
+
 	public Long getId() {
 		return id;
 	}
