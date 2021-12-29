@@ -18,11 +18,8 @@ public class ShopMain {
 		transaction.begin();
 		
 		try {
-
-//			간단하게 insert
-			Member member = new Member();
-			member.setName("sseob");
-			entityManager.persist(member);
+			
+			
 
 			transaction.commit();
 		} catch (Exception e){
