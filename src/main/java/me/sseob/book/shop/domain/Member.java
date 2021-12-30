@@ -1,6 +1,8 @@
 package me.sseob.book.shop.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Member {
@@ -12,6 +14,9 @@ public class Member {
 	@ManyToOne
 	@JoinColumn(name = "team_id")
 	private Team team;
+
+	@OneToMany(mappedBy = "member")
+	private List<Order> orders = new ArrayList<>();
 	
 	private String name;
 	private String city;
