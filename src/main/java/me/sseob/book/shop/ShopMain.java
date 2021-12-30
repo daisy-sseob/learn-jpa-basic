@@ -1,12 +1,8 @@
 package me.sseob.book.shop;
 
-import me.sseob.RoleType;
-import me.sseob.book.shop.domain.Member;
 import me.sseob.book.shop.domain.Order;
 import me.sseob.book.shop.domain.OrderItem;
-import me.sseob.book.shop.domain.Team;
 
-import javax.lang.model.SourceVersion;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
