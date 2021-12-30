@@ -2,6 +2,8 @@ package me.sseob.book.shop;
 
 import me.sseob.RoleType;
 import me.sseob.book.shop.domain.Member;
+import me.sseob.book.shop.domain.Order;
+import me.sseob.book.shop.domain.OrderItem;
 import me.sseob.book.shop.domain.Team;
 
 import javax.lang.model.SourceVersion;
@@ -21,19 +23,9 @@ public class ShopMain {
 		
 		try {
 
-//			Team tottenham = new Team("tottenham");
-//			entityManager.persist(tottenham);
-//			Member member = new Member("sseob22");
-//			member.setTeam(team);
-//			entityManager.persist(member);
-			
-//			Member findMember = entityManager.find(Member.class, 2L);
-//			System.out.println("===================" + findMember.getName());
-//
-//			for (Member member : findMember.getTeam().getMembers()) {
-//				System.out.println(member.getName());
-//			}
-			
+			Order order = new Order();
+			order.addOrderItem(new OrderItem());
+
 			transaction.commit();
 		} catch (Exception e){
 			transaction.rollback();
