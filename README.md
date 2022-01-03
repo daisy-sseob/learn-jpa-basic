@@ -1,3 +1,4 @@
 ### JAVA ORM 표준 JPA 학습하기.
 
-- JPA 구현체중에서 hibernate를 학습합니다.
+- JPA hibernate
+- 기본 원리, 영속성 컨텍스트, 연관관계 매핑, Jpql, Querydsl 등 JPA, JPA 관련된 것들을 학습하는 Repository
