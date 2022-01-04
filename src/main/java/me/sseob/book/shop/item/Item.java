@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED) // 객체 상속타입을 토대로 Table 상속 타입을 정할 수 있다.
 public class Item {
 
 	@Id
@@ -50,5 +51,17 @@ public class Item {
 
 	public void setStockQuantity(int stockQuantity) {
 		this.stockQuantity = stockQuantity;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Item{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", price=" + price +
+				", stockQuantity=" + stockQuantity +
+				", categories=" + categories +
+				'}';
 	}
 }
