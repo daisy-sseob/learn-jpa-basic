@@ -1,4 +1,4 @@
-package me.sseob.book.shop.domain;
+package me.sseob.book.shop.basic;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

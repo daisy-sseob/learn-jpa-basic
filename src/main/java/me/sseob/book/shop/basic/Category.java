@@ -1,4 +1,4 @@
-package me.sseob.book.shop.domain;
+package me.sseob.book.shop.basic;
 
 import me.sseob.book.shop.item.Item;
 

@@ -1,11 +1,11 @@
-package me.sseob.book.shop.domain;
+package me.sseob.book.shop.basic;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Member {
+public class Member extends BaseEntity{
 
 	@Id @GeneratedValue
 	@Column(name = "member_id")

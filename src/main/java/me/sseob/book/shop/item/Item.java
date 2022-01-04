@@ -1,6 +1,6 @@
 package me.sseob.book.shop.item;
 
-import me.sseob.book.shop.domain.Category;
+import me.sseob.book.shop.basic.Category;
 
 import javax.persistence.*;
 import java.util.ArrayList;

@@ -1,15 +1,13 @@
-package me.sseob.book.shop;
-
-import me.sseob.book.shop.domain.Order;
-import me.sseob.book.shop.domain.OrderItem;
+package me.sseob.book.shop.basic;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.time.LocalDateTime;
 
-public class ShopMain {
-
+public class BasicMain {
+	
 	public static void main(String[] args) {
 		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("sseob");
 		EntityManager entityManager = entityManagerFactory.createEntityManager(); // entity manager 생성하여 얻음
@@ -19,8 +17,14 @@ public class ShopMain {
 		
 		try {
 
-			Order order = new Order();
-			order.addOrderItem(new OrderItem());
+			Member member = new Member("sseob");
+			member.setCreatedBy("심현섭");
+			member.setCreatedDate(LocalDateTime.now());
+
+			entityManager.persist(member);
+
+			entityManager.flush();
+			entityManager.clear();
 
 			transaction.commit();
 		} catch (Exception e){

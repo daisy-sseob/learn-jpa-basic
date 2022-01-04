@@ -1,7 +1,5 @@
-package me.sseob.book.shop.domain;
+package me.sseob.book.shop.basic;
 
-
-import org.hibernate.mapping.Constraint;
 
 import javax.persistence.*;
 import java.util.HashSet;

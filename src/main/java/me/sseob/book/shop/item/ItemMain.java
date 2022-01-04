@@ -1,9 +1,5 @@
 package me.sseob.book.shop.item;
 
-import me.sseob.book.shop.domain.Order;
-import me.sseob.book.shop.domain.OrderItem;
-
-import javax.lang.model.SourceVersion;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
