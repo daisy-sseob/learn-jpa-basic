@@ -1,5 +1,7 @@
 package me.sseob.book.shop.domain;
 
+import me.sseob.book.shop.item.Item;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
