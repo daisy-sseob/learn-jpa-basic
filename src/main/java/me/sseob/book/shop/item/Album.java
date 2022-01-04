@@ -1,5 +1,7 @@
 package me.sseob.book.shop.item;
 
+import me.sseob.book.shop.basic.BaseEntity;
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 

@@ -1,5 +1,6 @@
 package me.sseob.book.shop.item;
 
+import me.sseob.book.shop.basic.BaseEntity;
 import me.sseob.book.shop.basic.Category;
 
 import javax.persistence.*;
@@ -14,7 +15,7 @@ import java.util.List;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED) // 객체 상속타입을 토대로 Table 상속 타입을 정할 수 있다.
 @DiscriminatorColumn // Item Table에 DTYPE컬럼을 추가해 하위 테이블의 타입을 구분짓는다.
-public class Item { 
+public class Item extends BaseEntity { 
 
 	@Id
 	@GeneratedValue
