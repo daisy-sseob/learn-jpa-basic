@@ -1,10 +1,10 @@
 package me.sseob.book.shop.item;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 
 @Entity
+@DiscriminatorValue("B")
 public class Book extends Item{
 
 	private String author;
