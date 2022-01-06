@@ -3,7 +3,7 @@ package me.sseob.book.shop.basic;
 import javax.persistence.*;
 
 @Entity
-public class Locker {
+public class Locker extends BaseEntity{
 
 	@Id @GeneratedValue
 	@Column(name = "locker_id")
