@@ -11,14 +11,14 @@ public class Member extends BaseEntity{
 	@Column(name = "member_id")
 	private Long id;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY) // 지연 로딩. proxy객체를 조회한다.
 	@JoinColumn(name = "team_id")
 	private Team team;
 
 	@OneToMany(mappedBy = "member")
 	private List<Order> orders = new ArrayList<>();
 
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "locker_id")
 	private Locker locker;
 	
