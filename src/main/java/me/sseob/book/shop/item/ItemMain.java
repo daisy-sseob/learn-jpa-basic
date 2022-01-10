@@ -32,8 +32,8 @@ public class ItemMain {
 			 */
 			Movie reference = entityManager.getReference(Movie.class, movie.getId());
 			System.out.println("movie1.getName() = " + reference.getClass()); // hibernate proxy class가 print 된다. (가짜 entity 객체) 
-			System.out.println("movie1.getName() = " + reference.getName());
-			System.out.println("movie1.getDirector() = " + reference.getDirector());
+			System.out.println("movie1.getName() = " + reference.getName()); // 첫 1회 getName 호출시 영속성 컨텍스트에 객체 초기화를 요청하게 되고 그 과정에서 select query가 발생한다.
+			System.out.println("movie1.getDirector() = " + reference.getDirector()); // select query발생하지 않고 초기화된 프록시 객체 그대로 사용.
 
 //			Movie movie1 = entityManager.find(Movie.class, movie.getId());
 //			System.out.println("movie1.getName() = " + movie1.getName());
