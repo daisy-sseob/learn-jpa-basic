@@ -31,6 +31,7 @@ public class ItemMain {
 				하지만 아래 print하는 코드가 있다면 select query를 뒤늦게 실행한다.
 			 */
 			Movie reference = entityManager.getReference(Movie.class, movie.getId());
+			System.out.println("movie1.getName() = " + reference.getClass()); // hibernate proxy class가 print 된다. (가짜 entity 객체) 
 			System.out.println("movie1.getName() = " + reference.getName());
 			System.out.println("movie1.getDirector() = " + reference.getDirector());
 
