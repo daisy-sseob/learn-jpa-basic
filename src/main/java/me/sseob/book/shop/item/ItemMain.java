@@ -25,9 +25,18 @@ public class ItemMain {
 			entityManager.persist(movie);
 			entityManager.flush();
 			entityManager.clear();
-			
-			Movie movie1 = entityManager.find(Movie.class, movie.getId());
-			System.out.println("movie1 = " + movie1);
+
+			/*
+				getReference() 가 실행되는 시점에는 select query가 실행되지 않는다.
+				하지만 아래 print하는 코드가 있다면 select query를 뒤늦게 실행한다.
+			 */
+			Movie reference = entityManager.getReference(Movie.class, movie.getId());
+			System.out.println("movie1.getName() = " + reference.getName());
+			System.out.println("movie1.getDirector() = " + reference.getDirector());
+
+//			Movie movie1 = entityManager.find(Movie.class, movie.getId());
+//			System.out.println("movie1.getName() = " + movie1.getName());
+//			System.out.println("movie1.getDirector() = " + movie1.getDirector());
 
 			transaction.commit();
 		} catch (Exception e){
