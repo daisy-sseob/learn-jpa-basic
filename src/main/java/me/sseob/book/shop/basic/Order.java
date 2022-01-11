@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import static javax.persistence.CascadeType.*;
+
 @Entity(name = "Orders")
 public class Order extends BaseEntity{
 
@@ -12,7 +14,7 @@ public class Order extends BaseEntity{
 	@Column(name = "order_id")
 	private Long id;
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY, cascade = ALL)
 	@JoinColumn(name = "delivery_id")
 	private Delivery delivery;
 
@@ -20,7 +22,7 @@ public class Order extends BaseEntity{
 	@JoinColumn(name = "member_id")
 	private Member member;
 
-	@OneToMany(mappedBy = "order")
+	@OneToMany(mappedBy = "order", cascade = ALL)
 	private List<OrderItem> orderItems = new ArrayList<>();
 	
 	private LocalDateTime orderDate;
