@@ -28,7 +28,12 @@ public class CasecadeMain {
 			entityManager.clear();
 			
 			Parent findParent = entityManager.find(Parent.class, parent.getId());
-			findParent.getChildList().remove(1); // orphanRemoval option을 통해 고아 객체가 삭제되는걸 확인할 수 있다.
+			
+			/*
+				orphanRemoval option을 통해 고아 객체가 삭제되는걸 확인할 수 있다.
+				parent를 삭제하더라도 child객체들이 고아가 되기 때문에 Casecade Remove option 처럼 동작한다.
+			 */
+			findParent.getChildList().remove(1);
 
 			transaction.commit();
 		} catch (Exception e){
