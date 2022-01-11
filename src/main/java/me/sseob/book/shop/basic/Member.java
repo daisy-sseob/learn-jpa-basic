@@ -30,6 +30,14 @@ public class Member extends BaseEntity{
 	
 	@Embedded
 	private Address homeAddress;
+	
+	@Embedded
+	@AttributeOverrides({
+			@AttributeOverride(name = "city", column =@Column(name = "work_city")),
+			@AttributeOverride(name = "street", column =@Column(name = "work_street")),
+			@AttributeOverride(name = "zipcode", column =@Column(name = "work_zipcode"))
+	}) // embedded type이 겹칠 경우 컬럼명을 재정의 해준다.
+	private Address workAddress;
 
 	public Member(String name) {
 		this.name = name;
@@ -37,6 +45,14 @@ public class Member extends BaseEntity{
 
 	public Member() {
 		
+	}
+
+	public Address getWorkAddress() {
+		return workAddress;
+	}
+
+	public void setWorkAddress(Address workAddress) {
+		this.workAddress = workAddress;
 	}
 
 	public List<Order> getOrders() {
