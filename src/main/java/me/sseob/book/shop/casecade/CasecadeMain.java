@@ -23,7 +23,13 @@ public class CasecadeMain {
 			parent.addChild(child2);
 
 			entityManager.persist(parent);
+
+			entityManager.flush();
+			entityManager.clear();
 			
+			Parent findParent = entityManager.find(Parent.class, parent.getId());
+			findParent.getChildList().remove(1); // orphanRemoval option을 통해 고아 객체가 삭제되는걸 확인할 수 있다.
+
 			transaction.commit();
 		} catch (Exception e){
 			transaction.rollback();
