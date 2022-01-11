@@ -17,10 +17,12 @@ public class CasecadeMain {
 
 			Child child = new Child("child");
 			Child child2 = new Child("child2");
+			Child child3 = new Child("child3");
 			
 			Parent parent = new Parent("parent");
 			parent.addChild(child);
 			parent.addChild(child2);
+			parent.addChild(child3);
 
 			entityManager.persist(parent);
 
@@ -33,7 +35,7 @@ public class CasecadeMain {
 				orphanRemoval option을 통해 고아 객체가 삭제되는걸 확인할 수 있다.
 				parent를 삭제하더라도 child객체들이 고아가 되기 때문에 Casecade Remove option 처럼 동작한다.
 			 */
-			findParent.getChildList().remove(1);
+			findParent.getChildList().remove(0);
 
 			transaction.commit();
 		} catch (Exception e){

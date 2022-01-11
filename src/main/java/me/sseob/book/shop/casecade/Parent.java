@@ -14,7 +14,7 @@ public class Parent {
 
 	private String name;
 
-	@OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true) // 두개의 옵션이 모두 켜져 있으면 부모 엔티티만을 통해 자식 엔티티 생명주기를 할 수 있다.
 	private List<Child> childList = new ArrayList<>();
 	
 	public Parent(String name) {
