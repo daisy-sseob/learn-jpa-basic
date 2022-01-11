@@ -18,7 +18,7 @@ public class Member extends BaseEntity{
 	@OneToMany(mappedBy = "member")
 	private List<Order> orders = new ArrayList<>();
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne
 	@JoinColumn(name = "locker_id")
 	private Locker locker;
 	

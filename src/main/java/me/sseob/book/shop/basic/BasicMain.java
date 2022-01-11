@@ -6,6 +6,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class BasicMain {
 	
@@ -35,7 +36,11 @@ public class BasicMain {
 			System.out.println("member1.getTeam() = " + member1.getTeam().getClass()); // team hibernate proxy객체가 출력된다. 즉 지연로딩으로 설정하여 proxy객체를 참조하게 만든다. proxy객체 출력후 select query가 실행되는걸 볼 수 있음.
 			System.out.println("member1.getTeam() = " + member1.getTeam().getName()); // 지연 로딩에 의해 나중에 Team이 join된다. 실제 사용될 때 proxy instance 초기화.
 			// 반대로 FetchType.EAGER 즉시로딩을 설정하게 되면 애초에 member, team을 join하여 select한다. 프록시 객체를 사용하지 않아도 된다.
-			
+
+			// 즉시로딩의 N + 1 문제는 지연로딩 + fetch join으로 해결할 수 있다.
+			List<Member> resultList = entityManager.createQuery("select m from Member m join fetch m.team", Member.class).getResultList();
+			resultList.forEach(System.out::println);
+
 			transaction.commit();
 		} catch (Exception e){
 			transaction.rollback();
