@@ -23,6 +23,8 @@ public class BasicMain {
 			entityManager.persist(team);
 			
 			Member member = new Member("sseob");
+			member.setHomeAddress(new Address("seoul", "홍대", "123123"));
+			member.setWorkPeriod(new Period(LocalDateTime.now(), LocalDateTime.now().minusDays(20)));
 			member.setCreatedBy("심현섭");
 			member.setCreatedDate(LocalDateTime.now());
 			member.setTeam(team);
