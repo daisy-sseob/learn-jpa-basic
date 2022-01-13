@@ -1,4 +1,9 @@
-package me.sseob.book.shop.basic;
+package me.sseob.book.shop.basic.main;
+
+import me.sseob.book.shop.basic.Address;
+import me.sseob.book.shop.basic.Member;
+import me.sseob.book.shop.basic.Period;
+import me.sseob.book.shop.basic.Team;
 
 import javax.lang.model.SourceVersion;
 import javax.persistence.EntityManager;
