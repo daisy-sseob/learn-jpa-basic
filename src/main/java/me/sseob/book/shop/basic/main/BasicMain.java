@@ -5,7 +5,6 @@ import me.sseob.book.shop.basic.Member;
 import me.sseob.book.shop.basic.Period;
 import me.sseob.book.shop.basic.Team;
 
-import javax.lang.model.SourceVersion;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -32,6 +31,12 @@ public class BasicMain {
 
 			Member member = new Member("sseob");
 			member.setHomeAddress(address);
+			member.getFavoriteFoods().add("치킨");
+			member.getFavoriteFoods().add("국수");
+			member.getFavoriteFoods().add("숭늉");
+			member.getAddressHistory().add(new Address("고양시", "도래울 1로", "123123"));
+			member.getAddressHistory().add(new Address("고양시", "도래울 2로", "123123123123"));
+			member.getAddressHistory().add(new Address("고양시", "도래울 3로", "1231244444443"));
 			member.setWorkAddress(new Address("goyang", "도래울 1로", "8020"));
 			member.setWorkPeriod(new Period(LocalDateTime.now(), LocalDateTime.now().minusDays(20)));
 			member.setCreatedBy("심현섭");
@@ -58,10 +63,21 @@ public class BasicMain {
 			entityManager.flush();
 			entityManager.clear();
 
-			Member findMember = entityManager.find(Member.class, member2.getId());
+			Member findMember = entityManager.find(Member.class, member.getId());
 			System.out.println("member1 = " + findMember.getName()); // Lock, Team을 지연로딩으로 설정후 조회하지 않으면 Member만 조회하는 Select query실행.
 			System.out.println("member1.getTeam() = " + findMember.getTeam().getClass()); // team hibernate proxy객체가 출력된다. 즉 지연로딩으로 설정하여 proxy객체를 참조하게 만든다. proxy객체 출력후 select query가 실행되는걸 볼 수 있음.
 			System.out.println("member1.getTeam() = " + findMember.getTeam().getName()); // 지연 로딩에 의해 나중에 Team이 join된다. 실제 사용될 때 proxy instance 초기화.
+			findMember.getAddressHistory().forEach(System.out::println);
+			Address homeAddress = findMember.getHomeAddress();
+			
+			// 값 type 업데이트
+			findMember.setHomeAddress(new Address(homeAddress.getCity(),homeAddress.getStreet(),"999999"));
+			// 값 type collection 데이터 변경
+			findMember.getFavoriteFoods().remove("치킨");
+			findMember.getFavoriteFoods().add("파스타");
+			findMember.getAddressHistory().remove(new Address("고양시", "도래울 1로", "123123"));
+			findMember.getAddressHistory().add(new Address("새로운 고양시", "도래울 1로", "11111"));
+			
 			// 반대로 FetchType.EAGER 즉시로딩을 설정하게 되면 애초에 member, team을 join하여 select한다. 프록시 객체를 사용하지 않아도 된다.
 
 			// 즉시로딩의 N + 1 문제는 지연로딩 + fetch join으로 해결할 수 있다.
