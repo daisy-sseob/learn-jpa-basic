@@ -35,15 +35,20 @@ public class BasicMain {
 			entityManager.persist(member);
 
 			Member member2 = new Member("sseob2");
-			member2.setHomeAddress(new Address(address.getCity(),address.getStreet(), address.getZipcode()));
+			member2.setHomeAddress(address);
 			member2.setWorkAddress(new Address("goyang", "도래울 1로", "8020"));
 			member2.setWorkPeriod(new Period(LocalDateTime.now(), LocalDateTime.now().minusDays(20)));
 			member2.setCreatedBy("심현섭2");
 			member2.setCreatedDate(LocalDateTime.now());
 			member2.setTeam(team);
 			entityManager.persist(member2);
+
+			// setter를 없애서 불변 객체로 만들면 임베디드 타입의 객체 참조 공유 문제를 방지할 수 있다.
+//			member2.getHomeAddress().setCity("서울 특별시");
 			
-			member2.getHomeAddress().setCity("서울 특별시");
+			// address를 변경하고 싶다면 새로운 객체를 만들어 변경하자.
+			Address copyAddress = new Address(address.getCity(), "도래울입니당.", address.getZipcode());
+			member.setHomeAddress(copyAddress);
 			
 			entityManager.flush();
 			entityManager.clear();
