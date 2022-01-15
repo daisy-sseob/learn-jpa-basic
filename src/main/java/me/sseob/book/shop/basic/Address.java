@@ -1,13 +1,17 @@
 package me.sseob.book.shop.basic;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.util.Objects;
 
 @Embeddable
 public class Address {
 	
+	@Column(length = 20)
 	private String city;
+	@Column(length = 100)
 	private String street;
+	@Column(length = 8)
 	private String zipcode;
 
 	public Address() {
@@ -26,9 +30,13 @@ public class Address {
 	public String getStreet() {
 		return street;
 	}
-
+	
 	public String getZipcode() {
 		return zipcode;
+	}
+	
+	private String fullAddress() {
+		return getCity() + " " + getStreet() + " " + getZipcode();
 	}
 
 	// equals와 hashCode method를 통해 값 타입의 비교를 지원한다. 객체를 비교하는게 아니라 값을 비교하도록 설계한다.
@@ -37,7 +45,9 @@ public class Address {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		Address address = (Address) o;
-		return Objects.equals(city, address.city) && Objects.equals(street, address.street) && Objects.equals(zipcode, address.zipcode);
+		return Objects.equals(getCity(), address.getCity()) && 
+				Objects.equals(getStreet(), address.getStreet()) &&
+				Objects.equals(getZipcode(), address.getZipcode());
 	}
 
 	@Override
