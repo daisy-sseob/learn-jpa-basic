@@ -2,10 +2,7 @@ package me.sseob.jpa.practice.sql.jpql;
 
 import me.sseob.jpa.practice.basic.Member;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 import java.util.List;
 
 /*
@@ -30,8 +27,13 @@ public class JpqlMain {
 				강제로 flush해주는 행위가 필요하다. (실제 insert하고나서 select하도록)
 				jpql은 알아서 강제 flush가 발생해서 아래 코드는 정상적으로 insert쿼리가 발생하고 그뒤에 select된다.
 			 */
-			String jpql = "select m from Member as m where m.name like '%현섭%'";
-			List<Member> findMemberList = em.createQuery(jpql, Member.class).getResultList();
+
+			String nameParam = "sseob";
+			String jpql = "select m from Member as m where m.name = :name";
+			TypedQuery<Member> query = em.createQuery(jpql, Member.class)
+					.setParameter("name", nameParam)
+					;
+			List<Member> findMemberList = query.getResultList();
 			
 			findMemberList.forEach(System.out::println);
 
