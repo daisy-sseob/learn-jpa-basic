@@ -1,9 +1,6 @@
 package me.sseob.book.shop.basic.main;
 
-import me.sseob.book.shop.basic.Address;
-import me.sseob.book.shop.basic.Member;
-import me.sseob.book.shop.basic.Period;
-import me.sseob.book.shop.basic.Team;
+import me.sseob.book.shop.basic.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -31,12 +28,9 @@ public class BasicMain {
 
 			Member member = new Member("sseob");
 			member.setHomeAddress(address);
-			member.getFavoriteFoods().add("치킨");
-			member.getFavoriteFoods().add("국수");
-			member.getFavoriteFoods().add("숭늉");
-			member.getAddressHistory().add(new Address("고양시", "도래울 1로", "123123"));
-			member.getAddressHistory().add(new Address("고양시", "도래울 2로", "123123123123"));
-			member.getAddressHistory().add(new Address("고양시", "도래울 3로", "1231244444443"));
+			member.getAddressHistory().add(new AddressEntity("고양시", "도래울 1로", "123123"));
+			member.getAddressHistory().add(new AddressEntity("고양시", "도래울 2로", "123123123123"));
+			member.getAddressHistory().add(new AddressEntity("고양시", "도래울 3로", "1231244444443"));
 			member.setWorkAddress(new Address("goyang", "도래울 1로", "8020"));
 			member.setWorkPeriod(new Period(LocalDateTime.now(), LocalDateTime.now().minusDays(20)));
 			member.setCreatedBy("심현섭");
@@ -73,10 +67,8 @@ public class BasicMain {
 			// 값 type 업데이트
 			findMember.setHomeAddress(new Address(homeAddress.getCity(),homeAddress.getStreet(),"999999"));
 			// 값 type collection 데이터 변경
-			findMember.getFavoriteFoods().remove("치킨");
-			findMember.getFavoriteFoods().add("파스타");
-			findMember.getAddressHistory().remove(new Address("고양시", "도래울 1로", "123123"));
-			findMember.getAddressHistory().add(new Address("새로운 고양시", "도래울 1로", "11111"));
+			findMember.getAddressHistory().remove( new AddressEntity("고양시", "도래울 1로", "123123"));
+			findMember.getAddressHistory().add(new AddressEntity("새로운 고양시", "도래울 1로", "11111"));
 			
 			// 반대로 FetchType.EAGER 즉시로딩을 설정하게 되면 애초에 member, team을 join하여 select한다. 프록시 객체를 사용하지 않아도 된다.
 

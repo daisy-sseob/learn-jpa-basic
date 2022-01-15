@@ -32,24 +32,32 @@ public class Member extends BaseEntity {
 
 	@Embedded
 	private Address homeAddress;
-
 	
 	/*
-		collection을 table에 저장할 수 없기 때문에 하위 테이블을 만들어 관리.
-		값 type collection들을 Member와 life cycle이 같다. 별로도 persist할 필요없다.
-	 */
-	@ElementCollection
-	@CollectionTable(name = "ADDRESS", joinColumns =
-		@JoinColumn(name = "member_id")
-	) // table명
-	private List<Address> addressHistory = new ArrayList<>();
-
 	@ElementCollection
 	@CollectionTable(name = "FAVORITE_FOOD", joinColumns =
 		@JoinColumn(name = "member_id")
 	)
 	@Column(name = "food_name")
 	private Set<String> favoriteFoods = new HashSet<>();
+	 */
+	
+	/*
+	collection을 table에 저장할 수 없기 때문에 하위 테이블을 만들어 관리.
+	값 type collection들을 Member와 life cycle이 같다. 별로도 persist할 필요없다.
+	그러나 !!
+	값 타입 컬렉션을 사용하기 보다는 1:N 관계의 Entity를 만들어 그곳에서 Embedded Type을 사용하자.
+	실무에서 여러 문제점이 발생한다.
+	@ElementCollection
+	@CollectionTable(name = "ADDRESS", joinColumns =
+		@JoinColumn(name = "member_id")
+	) // table명
+	private List<Address> addressHistory = new ArrayList<>();
+	 */
+
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "member_id")
+	private List<AddressEntity> addressHistory = new ArrayList<>();
 
 	@Embedded
 	@AttributeOverrides({
@@ -126,24 +134,16 @@ public class Member extends BaseEntity {
 	public String getName() {
 		return name;
 	}
-
+	
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	public List<Address> getAddressHistory() {
+	public List<AddressEntity> getAddressHistory() {
 		return addressHistory;
 	}
 
-	public void setAddressHistory(List<Address> addressHistory) {
+	public void setAddressHistory(List<AddressEntity> addressHistory) {
 		this.addressHistory = addressHistory;
-	}
-
-	public Set<String> getFavoriteFoods() {
-		return favoriteFoods;
-	}
-
-	public void setFavoriteFoods(Set<String> favoriteFoods) {
-		this.favoriteFoods = favoriteFoods;
 	}
 }
