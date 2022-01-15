@@ -13,6 +13,7 @@ import java.util.List;
 
 /*
 	JPA 표준 스펙으로 제공하지만 어느정도 복잡성이 있기 때문에 실무에서는 보통 쓰지 않는다.
+	Criteria는 JPQL Builder역할을 한다.
  */
 public class CriteriaMain {
 	public static void main(String[] args) {
