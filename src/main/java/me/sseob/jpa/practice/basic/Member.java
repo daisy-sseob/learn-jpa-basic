@@ -12,13 +12,15 @@ public class Member extends BaseEntity {
 	@Column(name = "member_id")
 	private Long id;
 
+	private int age;
+
 	private String name;
 
 	@ManyToOne(fetch = FetchType.LAZY) // 지연 로딩. proxy객체를 조회한다.
 	@JoinColumn(name = "team_id")
 	private Team team;
 
-	@OneToMany(mappedBy = "member")
+	@OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
 	private List<Order> orders = new ArrayList<>();
 
 	@OneToOne(fetch = FetchType.LAZY)
@@ -53,7 +55,7 @@ public class Member extends BaseEntity {
 	private List<Address> addressHistory = new ArrayList<>();
 	 */
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "member_id")
 	private List<AddressEntity> addressHistory = new ArrayList<>();
 
@@ -145,18 +147,20 @@ public class Member extends BaseEntity {
 		this.addressHistory = addressHistory;
 	}
 
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
 	@Override
 	public String toString() {
 		return "Member{" +
 				"id=" + id +
+				", age=" + age +
 				", name='" + name + '\'' +
-				", team=" + team +
-				", orders=" + orders +
-				", locker=" + locker +
-				", workPeriod=" + workPeriod +
-				", homeAddress=" + homeAddress +
-				", addressHistory=" + addressHistory +
-				", workAddress=" + workAddress +
 				'}';
 	}
 }
