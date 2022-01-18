@@ -16,31 +16,35 @@ public class JpqlJoinMain {
 
 		EntityTransaction transaction = em.getTransaction();
 		transaction.begin();
-		
+
 		try {
 
 			Team team = new Team("뉴캐슬");
 			em.persist(team);
-			
-			Member member = new Member("현섭");
+
+			Member member = new Member("뉴캐슬");
 			member.setAge(29);
 			member.setTeam(team);
 			em.persist(member);
-
-			team.addMember(member);
 			
+			team.addMember(member);
+
 			em.flush();
 			em.clear();
-			
+
 			List<Member> innerJoinList = em.createQuery("select m from Member as m inner join m.team as t", Member.class).getResultList();
 			innerJoinList.forEach(System.out::println);
-			
+
 			List<Member> leftJoinList = em.createQuery("select m from Member as m left join m.team as t", Member.class).getResultList();
 			leftJoinList.forEach(System.out::println);
+			
+			// on절도 사용 가능하다.
+			List<Member> joinList = em.createQuery("select m from Member as m left join Team t on m.name = t.name", Member.class).getResultList();
+			joinList.forEach(System.out::println);
 
 			List<Member> crossJoinList = em.createQuery("select m from Member as m, Team as t where m.name = t.name", Member.class).getResultList();
 			crossJoinList.forEach(System.out::println);
-			
+
 			transaction.commit();
 		} catch (Exception e){
 			transaction.rollback();
