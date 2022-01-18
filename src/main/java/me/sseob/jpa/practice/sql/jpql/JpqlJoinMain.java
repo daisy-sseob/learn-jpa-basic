@@ -44,7 +44,7 @@ public class JpqlJoinMain {
 
 			List<Member> crossJoinList = em.createQuery("select m from Member as m, Team as t where m.name = t.name", Member.class).getResultList();
 			crossJoinList.forEach(System.out::println);
-
+			
 			transaction.commit();
 		} catch (Exception e){
 			transaction.rollback();
