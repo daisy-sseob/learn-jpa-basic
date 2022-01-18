@@ -5,11 +5,11 @@ import me.sseob.jpa.practice.basic.Member;
 import me.sseob.jpa.practice.basic.MemberDTO;
 import me.sseob.jpa.practice.basic.Team;
 
-import javax.persistence.*;
-import java.nio.channels.Pipe;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 /*
 	jpql은 객체지향 sql이다. 테이블이 아닌 객체 중심으로 대상을 검색할 수 있다.
@@ -32,7 +32,6 @@ public class JpqlMain {
 
 			em.flush();
 			em.clear();
-
 			
 			/*
 				jpql이 아닌 JPA 스펙과 관련없는 select행위(connection객체를 통해 직접 select 하는 경우와 같은..)를 하는 경우
