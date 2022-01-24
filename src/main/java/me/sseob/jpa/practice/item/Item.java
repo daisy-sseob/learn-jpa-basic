@@ -25,7 +25,7 @@ public class Item extends BaseEntity {
 	private int price;
 	private int stockQuantity;
 	
-	@ManyToMany(mappedBy = "items")
+	@ManyToMany(mappedBy = "items", fetch = FetchType.LAZY)
 	private List<Category> categories = new ArrayList<>();
 
 	public Long getId() {
@@ -68,7 +68,6 @@ public class Item extends BaseEntity {
 				", name='" + name + '\'' +
 				", price=" + price +
 				", stockQuantity=" + stockQuantity +
-				", categories=" + categories +
 				'}';
 	}
 }
