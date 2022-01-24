@@ -32,7 +32,7 @@ public class JpqlCaseQuery {
 			em.flush();
 			em.clear();
 
-			// JPQL의 Type 표현
+			// JPQL의 case문
 			String query = "select " +
 									"case " +
 									"       when m.age <= 10 then '초등학생' " +
@@ -43,6 +43,19 @@ public class JpqlCaseQuery {
 			List<String> result = em.createQuery(query, String.class).getResultList();
 			for (String str : result) {
 				System.out.println("str = " + str);
+			}
+			
+			// JPQL의 function
+			String functionQuery = "select substring(m.name,0,1) from Member m";
+			List<String> result2 = em.createQuery(functionQuery, String.class).getResultList();
+			for (String resultStr : result2) {
+				System.out.println("result = " + resultStr);
+			}
+			
+			String sizeQuery = "select size(t.members) from Team t";
+			List<String> sizeResult = em.createQuery(sizeQuery, String.class).getResultList();
+			for (String size : sizeResult) {
+				System.out.println("size = " + size);
 			}
 
 			transaction.commit();
