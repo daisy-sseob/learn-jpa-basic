@@ -67,6 +67,9 @@ public class Member extends BaseEntity {
 	}) // embedded type이 겹칠 경우 컬럼명을 재정의 해준다.
 	private Address workAddress;
 
+	@Enumerated(EnumType.STRING)
+	private MemberType memberType;
+	
 	public Member(String name) {
 		this.name = name;
 	}
@@ -153,6 +156,14 @@ public class Member extends BaseEntity {
 
 	public void setAge(int age) {
 		this.age = age;
+	}
+
+	public MemberType getMemberType() {
+		return memberType;
+	}
+
+	public void setMemberType(MemberType memberType) {
+		this.memberType = memberType;
 	}
 
 	@Override
