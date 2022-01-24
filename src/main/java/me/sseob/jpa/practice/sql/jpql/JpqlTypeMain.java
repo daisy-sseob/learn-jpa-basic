@@ -52,7 +52,9 @@ public class JpqlTypeMain {
 				System.out.println("objects[2] = " + objects[2] + "\n");
 			}
 
-			List<Item> books = em.createQuery("select i from Item i where type(i) = Book ", Item.class)
+			List<Item> books = em.createQuery("select i from Item i " +
+							"                       where   type(i) = Book " +
+													"       and i.id between 0 and 2", Item.class)
 					.getResultList();
 			books.forEach(System.out::println);
 
