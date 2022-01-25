@@ -52,10 +52,10 @@ public class JpqlCaseQuery {
 				System.out.println("result = " + resultStr);
 			}
 			
-			String sizeQuery = "select size(t.members) from Team t";
-			List<String> sizeResult = em.createQuery(sizeQuery, String.class).getResultList();
-			for (String size : sizeResult) {
-				System.out.println("size = " + size);
+			String function = "select function('group_concat', m.name) from Member m";
+			List<String> functionResult = em.createQuery(function, String.class).getResultList();
+			for (String str : functionResult) {
+				System.out.println("function result = " + str);
 			}
 
 			transaction.commit();
