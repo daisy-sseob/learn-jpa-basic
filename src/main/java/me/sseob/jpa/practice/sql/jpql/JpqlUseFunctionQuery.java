@@ -12,7 +12,7 @@ import java.util.List;
 /*
 	jpql은 객체지향 sql이다. 테이블이 아닌 객체 중심으로 대상을 검색할 수 있다.
  */
-public class JpqlCaseQuery {
+public class JpqlUseFunctionQuery {
 	public static void main(String[] args) {
 		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("sseob");
 		EntityManager em = entityManagerFactory.createEntityManager(); // entity manager 생성하여 얻음
