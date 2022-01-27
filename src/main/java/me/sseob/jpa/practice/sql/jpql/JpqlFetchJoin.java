@@ -69,6 +69,13 @@ public class JpqlFetchJoin {
 				System.out.println("result = " + t.getMembers() + ", " + t.getName());
 			}
 			
+			// sql query문 자체는 중복이 제거되지 않는다. 하지만 jpql을 통해 application level에서 중복제거를 추가로 진행한다.
+			String distinctQuery = "select distinct t from Team t join fetch t.members ";
+			List<Team> resultList3 = em.createQuery(distinctQuery, Team.class).getResultList();
+			for (Team t : resultList3) {
+				System.out.println("distinct result = " + t.getMembers() + ", " + t.getName());
+			}
+			
 			transaction.commit();
 		} catch (Exception e){
 			transaction.rollback();
