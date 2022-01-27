@@ -76,7 +76,12 @@ public class JpqlFetchJoin {
 				System.out.println("distinct result = " + t.getMembers() + ", " + t.getName());
 			}
 			
-			// fetch join을 사용하지 못하는데 paging이 필요한 경우
+			/*
+				fetch join은 둘 이상의 컬렉션을 fetch join할 수 없다.
+				collection을 fetch join하면 paging을 사용할 수 없다. 페이징이 가능하긴 하지만 application level에서의 
+				paging이 이루어지기 때문에 매우 위험하다.
+			 */
+			// fetch join을 사용하지 못하는데 paging이 필요한 경우 Batch size setting을 설정한 (where in절) query를 이용한다.
 			String fetchjoin = "select t from Team t ";
 			List<Team> resultList4 = em.createQuery(fetchjoin, Team.class)
 					.setFirstResult(0)
