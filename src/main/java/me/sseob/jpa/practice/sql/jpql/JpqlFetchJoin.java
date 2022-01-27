@@ -58,23 +58,23 @@ public class JpqlFetchJoin {
 			// N + 1 문제는 즉시 로딩으로 설정 되어있더라도 발생할 수 있다. 
 			// String query = "select m from Member m";
 			String query = "select m from Member m join fetch m.team";
-			List<Member> resultList = em.createQuery(query, Member.class).getResultList();
-			for (Member m : resultList) {
-				System.out.println("result = " + m.getTeam().getName() + ", " + m.getName());
-			}
-
-			String teamQuery = "select t from Team t join fetch t.members ";
-			List<Team> resultList2 = em.createQuery(teamQuery, Team.class).getResultList();
-			for (Team t : resultList2) {
-				System.out.println("result = " + t.getMembers() + ", " + t.getName());
-			}
-
-			// sql query문 자체는 중복이 제거되지 않는다. 하지만 jpql을 통해 application level에서 중복제거를 추가로 진행한다.
-			String distinctQuery = "select distinct t from Team t join fetch t.members ";
-			List<Team> resultList3 = em.createQuery(distinctQuery, Team.class).getResultList();
-			for (Team t : resultList3) {
-				System.out.println("distinct result = " + t.getMembers() + ", " + t.getName());
-			}
+//			List<Member> resultList = em.createQuery(query, Member.class).getResultList();
+//			for (Member m : resultList) {
+//				System.out.println("result = " + m.getTeam().getName() + ", " + m.getName());
+//			}
+//
+//			String teamQuery = "select t from Team t join fetch t.members ";
+//			List<Team> resultList2 = em.createQuery(teamQuery, Team.class).getResultList();
+//			for (Team t : resultList2) {
+//				System.out.println("result = " + t.getMembers() + ", " + t.getName());
+//			}
+//
+//			// sql query문 자체는 중복이 제거되지 않는다. 하지만 jpql을 통해 application level에서 중복제거를 추가로 진행한다.
+//			String distinctQuery = "select distinct t from Team t join fetch t.members ";
+//			List<Team> resultList3 = em.createQuery(distinctQuery, Team.class).getResultList();
+//			for (Team t : resultList3) {
+//				System.out.println("distinct result = " + t.getMembers() + ", " + t.getName());
+//			}
 			
 			/*
 				fetch join은 둘 이상의 컬렉션을 fetch join할 수 없다.

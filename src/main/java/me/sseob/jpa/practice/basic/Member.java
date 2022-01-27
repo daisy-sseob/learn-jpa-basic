@@ -11,7 +11,7 @@ public class Member extends BaseEntity {
 	@GeneratedValue
 	@Column(name = "member_id")
 	private Long id;
-
+	
 	private int age;
 
 	private String name;
