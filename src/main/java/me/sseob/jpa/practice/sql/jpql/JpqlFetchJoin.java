@@ -62,18 +62,33 @@ public class JpqlFetchJoin {
 			for (Member m : resultList) {
 				System.out.println("result = " + m.getTeam().getName() + ", " + m.getName());
 			}
-			
+
 			String teamQuery = "select t from Team t join fetch t.members ";
 			List<Team> resultList2 = em.createQuery(teamQuery, Team.class).getResultList();
 			for (Team t : resultList2) {
 				System.out.println("result = " + t.getMembers() + ", " + t.getName());
 			}
-			
+
 			// sql query문 자체는 중복이 제거되지 않는다. 하지만 jpql을 통해 application level에서 중복제거를 추가로 진행한다.
 			String distinctQuery = "select distinct t from Team t join fetch t.members ";
 			List<Team> resultList3 = em.createQuery(distinctQuery, Team.class).getResultList();
 			for (Team t : resultList3) {
 				System.out.println("distinct result = " + t.getMembers() + ", " + t.getName());
+			}
+			
+			// fetch join을 사용하지 못하는데 paging이 필요한 경우
+			String fetchjoin = "select t from Team t ";
+			List<Team> resultList4 = em.createQuery(fetchjoin, Team.class)
+					.setFirstResult(0)
+					.setMaxResults(1)
+					.getResultList();
+			
+			for (Team t : resultList4) {
+				System.out.println("fetch paging result = " + t.getName());
+				
+				for (Member member : t.getMembers()) {
+					System.out.println("member.getName() = " + member.getName());
+				}
 			}
 			
 			transaction.commit();
