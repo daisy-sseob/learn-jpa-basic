@@ -37,15 +37,19 @@ public class JpqlEntitySearch {
 			List<Member> resultList = em.createQuery("select m from Member as m where m = :member", Member.class)
 					.setParameter("member", sseob)
 					.getResultList();
-			
+			resultList.forEach(System.out::println);
+
 			// 외래키인 Team객체로도 조회할 수 있다.
 			List<Member> resultList2 = em.createQuery("select m from Member as m where m.team = :team", Member.class)
 					.setParameter("team", team)
 					.getResultList();
-			
-			resultList.forEach(System.out::println);
 			resultList2.forEach(System.out::println);
-			
+
+			List<Member> resultList3 = em.createNamedQuery("Member.findByUsername", Member.class)
+					.setParameter("name", "sseob")
+					.getResultList();
+			resultList3.forEach(System.out::println);
+
 			transaction.commit();
 		} catch (Exception e){
 			e.printStackTrace();
