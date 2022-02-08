@@ -1,11 +1,9 @@
 package me.sseob.jpa.practice.sql.jpql;
 
 import me.sseob.jpa.practice.basic.Member;
+import me.sseob.jpa.practice.basic.Team;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 import java.util.List;
 
 public class JpqlEntitySearch {
@@ -19,12 +17,17 @@ public class JpqlEntitySearch {
 
 		try {
 
+			Team team = new Team("뉴캐슬");
+			em.persist(team);
+
 			Member member = new Member("현섭");
 			member.setAge(29);
+			member.setTeam(team);
 			em.persist(member);
 			
 			Member sseob = new Member("sseob");
 			sseob.setAge(29);
+			sseob.setTeam(team);
 			em.persist(sseob);
 			
 			em.flush();
@@ -35,10 +38,17 @@ public class JpqlEntitySearch {
 					.setParameter("member", sseob)
 					.getResultList();
 			
+			// 외래키인 Team객체로도 조회할 수 있다.
+			List<Member> resultList2 = em.createQuery("select m from Member as m where m.team = :team", Member.class)
+					.setParameter("team", team)
+					.getResultList();
+			
 			resultList.forEach(System.out::println);
+			resultList2.forEach(System.out::println);
 			
 			transaction.commit();
 		} catch (Exception e){
+			e.printStackTrace();
 			transaction.rollback();
 		} finally {
 			em.close();
