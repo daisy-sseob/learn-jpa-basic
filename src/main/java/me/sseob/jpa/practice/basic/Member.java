@@ -20,7 +20,7 @@ public class Member extends BaseEntity {
 
 	private String name;
 
-	@ManyToOne(fetch = FetchType.LAZY) // 지연 로딩. proxy객체를 조회한다.
+	@ManyToOne(fetch = FetchType.EAGER) // 지연 로딩. proxy객체를 조회한다.
 	@JoinColumn(name = "team_id")
 	private Team team;
 
