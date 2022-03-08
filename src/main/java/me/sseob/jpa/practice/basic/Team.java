@@ -17,7 +17,7 @@ public class Team extends BaseEntity{
 	private String name;
 	
 	// 읽기전용의 매핑인 것이다. 연관관계의 주인이 아님.
-	@BatchSize(size = 100)
+//	@BatchSize(size = 100)
 	@OneToMany(mappedBy = "team")
 	private Set<Member> members = new HashSet<>();
 	
